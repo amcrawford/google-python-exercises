@@ -22,7 +22,11 @@
 # Note: python does not have a ++ operator, but += works.
 def match_ends(words):
   # +++your code here+++
-  return
+  count = 0
+  for word in words:
+      if len(word) >= 2 and word[0] == word[-1]:
+        count += 1
+  return count
 
 
 # B. front_x
@@ -34,7 +38,22 @@ def match_ends(words):
 # before combining them.
 def front_x(words):
   # +++your code here+++
-  return
+  xwords = []
+  other_words = []
+
+  for word in words:
+    if "x" == word[0]:
+        xwords.append(word)
+    else:
+        other_words.append(word)
+
+  xwords.sort()
+  other_words.sort()
+
+  for word in other_words:
+      xwords.append(word)
+
+  return xwords
 
 
 
@@ -45,8 +64,11 @@ def front_x(words):
 # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 # Hint: use a custom key= function to extract the last element form each tuple.
 def sort_last(tuples):
-  # +++your code here+++
-  return
+  sorted_list = sorted(tuples, key= find_last_number)
+  return sorted_list
+
+def find_last_number(tuples):
+	return tuples[-1]
 
 
 # Simple provided test() function used in main() to print
@@ -75,7 +97,7 @@ def main():
   test(front_x(['mix', 'xyz', 'apple', 'xanadu', 'aardvark']),
        ['xanadu', 'xyz', 'aardvark', 'apple', 'mix'])
 
-       
+
   print
   print 'sort_last'
   test(sort_last([(1, 3), (3, 2), (2, 1)]),
