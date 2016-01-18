@@ -49,6 +49,36 @@ import sys
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
+
+def read_file(filename):
+    f = open(filename, 'rU')
+    return f.read()
+
+def count_words(text):
+    word_count = {}
+    for word in text:
+        if word.lower() in word_count:
+            word_count[word.lower()] = word_count[word.lower()] + 1
+        else:
+            word_count[word.lower()] = 1
+    return word_count
+
+def get_value(item):
+    return item[1]
+
+def print_words(filename):
+    f = read_file(filename).split()
+    word_count = count_words(f)
+    for word in sorted(word_count):
+        print word, " ", word_count[word]
+
+def print_top(filename):
+    f = read_file(filename).split()
+    word_count = count_words(f)
+    top_words =  sorted(word_count.items(), key=get_value, reverse=True)[0:21]
+    for pair in top_words:
+        print pair[0], " ", pair[1]
+
 def main():
   if len(sys.argv) != 3:
     print 'usage: ./wordcount.py {--count | --topcount} file'
